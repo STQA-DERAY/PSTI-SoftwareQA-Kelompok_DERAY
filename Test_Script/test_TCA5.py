@@ -8,8 +8,8 @@ from selenium.webdriver.chrome.service import Service
 @pytest.fixture(scope="module")
 def driver():
     options = webdriver.ChromeOptions()
-    options.add_argument(r"user-data-dir=C:/Users/LENOVO/AppData/Local/Google/Chrome/User Data")
-    options.add_argument("--profile-directory=Profile 1")
+    options.add_argument(r"user-data-dir=C:/Users/LENOVO/AppData/Local/Google/Chrome/User Data") # Ganti dengan path user data Chrome Anda
+    options.add_argument("--profile-directory=Profile 1") # Ganti dengan nama profil yang sesuai
 
     service = Service('chromedriver.exe')
     driver = webdriver.Chrome(service=service, options=options)
@@ -25,10 +25,10 @@ def test_send_large_file(driver):
     time.sleep(5)
     search_box = driver.find_element(By.XPATH, '//div[@title="Search input textbox"]')
     search_box.click()
-    search_box.send_keys("Kontak Uji")
+    search_box.send_keys("reyg")  # Ganti dengan nama kontak valid
     time.sleep(2)
 
-    contact = driver.find_element(By.XPATH, '//span[@title="Kontak Uji"]')
+    contact = driver.find_element(By.XPATH, '//span[@title="reyg"]')
     contact.click()
     time.sleep(2)
 

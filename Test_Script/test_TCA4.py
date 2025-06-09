@@ -25,10 +25,10 @@ def test_send_text_and_media(driver):
     time.sleep(5)
     search_box = driver.find_element(By.XPATH, '//div[@title="Search input textbox"]')
     search_box.click()
-    search_box.send_keys("Kontak Uji")  # Ganti dengan nama kontak valid
+    search_box.send_keys("reyg")  # Ganti dengan nama kontak valid
     time.sleep(2)
 
-    contact = driver.find_element(By.XPATH, '//span[@title="Kontak Uji"]')
+    contact = driver.find_element(By.XPATH, '//span[@title="reyg"]')
     contact.click()
     time.sleep(2)
 

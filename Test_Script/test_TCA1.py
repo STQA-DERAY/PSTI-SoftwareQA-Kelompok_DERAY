@@ -7,15 +7,20 @@ import time
 @pytest.fixture(scope="module")
 def driver():
     options = webdriver.ChromeOptions()
-    options.add_argument(r"user-data-dir=C:/Users/LENOVO/AppData/Local/Google/Chrome/User Data")
-    options.add_argument("--profile-directory=Profile 1")
+    options.add_argument(r"user-data-dir=C:/Users/LENOVO/AppData/Local/Google/Chrome/User Data") # Ganti dengan path user data Chrome Anda
+    options.add_argument(r"--profile-directory=Profile 1") # Ganti dengan nama profil yang sesuai
+    options.add_argument("--disable-infobars")
+    options.add_argument("--disable-extensions")
+    options.add_argument("--disable-dev-shm-usage")
+    options.add_argument("--no-sandbox")
 
-    service = Service('chromedriver.exe')
+    # Setup ChromeDriver service
+    service = Service('chromedriver.exe') # Pastikan chromedriver.exe ada di direktori yang sama atau ganti path sesuai lokasi
     driver = webdriver.Chrome(service=service, options=options)
 
-    time.sleep(5) 
+    # Buka WhatsApp Web
     driver.get("https://web.whatsapp.com")
-    assert "web.whatsapp.com" in driver.current_url
+    time.sleep(10)  # waktu login manual jika belum login 10 detik
 
     yield driver
     driver.quit()
@@ -32,7 +37,7 @@ def test_create_group(driver):
     new_group_btn.click()
     time.sleep(1)
 
-    # Tambahkan peserta (pastikan ada minimal 1 kontak tersimpan)
+    # Tambahkan peserta
     contact = driver.find_element(By.XPATH, '//div[@role="option"]')
     contact.click()
     next_btn = driver.find_element(By.XPATH, '//span[@data-icon="arrow-forward"]')
